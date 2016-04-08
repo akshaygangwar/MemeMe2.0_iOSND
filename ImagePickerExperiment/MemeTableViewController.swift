@@ -25,8 +25,7 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
+        let appDelegate = initialiseAppDelegate()
         return appDelegate.memes.count
     }
     
@@ -46,6 +45,22 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
         let navigator = self.navigationController
         navigator?.pushViewController(detailVC, animated: true)
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            handleDeletions(tableView, indexPath: indexPath)
+        }
+    }
+    
+    func handleDeletions(tableView: UITableView, indexPath: NSIndexPath) {
+        tableView.beginUpdates()
+        let appDelegate = initialiseAppDelegate()
+        appDelegate.memes.removeAtIndex(indexPath.row)
+        memes = appDelegate.memes
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        tableView.endUpdates()
+    }
+
     
     func initialiseAppDelegate() -> AppDelegate {
         let object = UIApplication.sharedApplication().delegate

@@ -33,6 +33,10 @@ class MemeCollectionViewController: UICollectionViewController {
         flowLayout.itemSize = CGSizeMake(dimension, dimension)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.collectionView?.reloadData()
+    }
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memes.count
     }
@@ -41,7 +45,6 @@ class MemeCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionCell", forIndexPath: indexPath) as! MemeCollectionCell
         let meme = memes[indexPath.item]
         cell.collectionImageView?.image = meme.memedImage
-        //cell.label?.text = "ABC"
         return cell
     }
     
