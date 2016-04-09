@@ -13,9 +13,10 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
     var memes:[Meme]!
     
     @IBAction func createMeme(sender: AnyObject) {
-        
+        let navigator = self.navigationController
         let newMemeVC = self.storyboard?.instantiateViewControllerWithIdentifier("CreateMemeViewController")
-        self.presentViewController(newMemeVC!, animated: true, completion: nil)
+        navigator?.pushViewController(newMemeVC!, animated: true)
+        //self.presentViewController(newMemeVC!, animated: true, completion: nil)
         
     }
     override func viewDidLoad() {

@@ -114,8 +114,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         //if cancelled by user, simply dismiss the picker
         dismissViewControllerAnimated(true, completion: nil)
         //v2.0 , if cancelled nav back to Sent Memes.
-        let sentMemesVC = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemesViewController")
-        self.presentViewController(sentMemesVC!, animated: true, completion: nil)
+        let navigator = self.navigationController
+        navigator?.popToRootViewControllerAnimated(true)
+        //let sentMemesVC = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemesViewController")
+        //self.presentViewController(sentMemesVC!, animated: true, completion: nil)
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -147,16 +149,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     //MARK: Initial App Setup Functions
-    
-//    func initialiseTextFields() {
-//        topTextField.defaultTextAttributes = memeTextAttributes
-//        bottomTextField.defaultTextAttributes = memeTextAttributes
-//        topTextField.delegate = self
-//        bottomTextField.delegate = self
-//        topTextField.textAlignment = NSTextAlignment.Center
-//        bottomTextField.textAlignment = NSTextAlignment.Center
-//        topTextField.adjustsFontSizeToFitWidth = true
-//    }
     
     func initialiseTextFields(textFields: [UITextField]) {
         for textField in textFields {
